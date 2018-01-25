@@ -10,26 +10,22 @@ using System.IO;
 
 namespace vk_api_wf
 {
-    class API
+    class API //работа с API
     {
 
-        public static T Get_Info_User<T>(string url)
+        public static T GetResponse<T>(string url)//получение Get запроса и возврат в виде объекта
         {
-            object value = null;
-            var reqGet = WebRequest.Create(url);
-            var resp = reqGet.GetResponse();
-            var stream = resp.GetResponseStream();
-
+            string requestText = "";
+            WebRequest webRequest=WebRequest.Create(url);
+            WebResponse webResponse = webRequest.GetResponse();
+            Stream stream = webResponse.GetResponseStream();
             if (stream != null)
             {
-                //читаем поток в строку
                 StreamReader sr = new StreamReader(stream);
-                var srToString = sr.ReadToEnd();
-                //десериализуем JSON строку в объект
-                return JsonConvert.DeserializeObject<T>(srToString);
+                requestText = sr.ReadToEnd();
             }
-            //Возвращаем объект
-            return (T)value;
+            var ob=JsonConvert.DeserializeObject<T>(requestText);
+            return ob;
         }
     }
 }

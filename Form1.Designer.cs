@@ -28,39 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.user_Photo = new System.Windows.Forms.PictureBox();
+            this.pictureBoxUserPhoto = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label_User_BDay = new System.Windows.Forms.Label();
+            this.buttonLeft = new System.Windows.Forms.Button();
+            this.buttonRight = new System.Windows.Forms.Button();
+            this.labelUserBirthDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label_User_Country = new System.Windows.Forms.Label();
+            this.labelUserCountry = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label_User_City = new System.Windows.Forms.Label();
+            this.labelUserCity = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label_User_Surname = new System.Windows.Forms.Label();
+            this.labelUserSurname = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label_user_Name = new System.Windows.Forms.Label();
+            this.labelUserName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_User_ID = new System.Windows.Forms.TextBox();
-            this.button_Get_Information = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.user_Photo)).BeginInit();
+            this.textBoxUser1ID = new System.Windows.Forms.TextBox();
+            this.textBoxUser2ID = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonFindFriends = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserPhoto)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // user_Photo
+            // pictureBoxUserPhoto
             // 
-            this.user_Photo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.user_Photo.Location = new System.Drawing.Point(8, 7);
-            this.user_Photo.Name = "user_Photo";
-            this.user_Photo.Size = new System.Drawing.Size(192, 123);
-            this.user_Photo.TabIndex = 0;
-            this.user_Photo.TabStop = false;
+            this.pictureBoxUserPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxUserPhoto.Location = new System.Drawing.Point(8, 7);
+            this.pictureBoxUserPhoto.Name = "pictureBoxUserPhoto";
+            this.pictureBoxUserPhoto.Size = new System.Drawing.Size(262, 160);
+            this.pictureBoxUserPhoto.TabIndex = 0;
+            this.pictureBoxUserPhoto.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(231, 7);
+            this.label1.Location = new System.Drawing.Point(296, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 1;
@@ -68,153 +72,194 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label_User_BDay);
+            this.panel1.Controls.Add(this.buttonLeft);
+            this.panel1.Controls.Add(this.buttonRight);
+            this.panel1.Controls.Add(this.labelUserBirthDate);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label_User_Country);
+            this.panel1.Controls.Add(this.labelUserCountry);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label_User_City);
+            this.panel1.Controls.Add(this.labelUserCity);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label_User_Surname);
+            this.panel1.Controls.Add(this.labelUserSurname);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label_user_Name);
-            this.panel1.Controls.Add(this.user_Photo);
+            this.panel1.Controls.Add(this.labelUserName);
+            this.panel1.Controls.Add(this.pictureBoxUserPhoto);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(490, 187);
+            this.panel1.Size = new System.Drawing.Size(553, 236);
             this.panel1.TabIndex = 2;
             // 
-            // label_User_BDay
+            // buttonLeft
             // 
-            this.label_User_BDay.AutoSize = true;
-            this.label_User_BDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_User_BDay.Location = new System.Drawing.Point(311, 147);
-            this.label_User_BDay.Name = "label_User_BDay";
-            this.label_User_BDay.Size = new System.Drawing.Size(18, 20);
-            this.label_User_BDay.TabIndex = 10;
-            this.label_User_BDay.Text = "_";
+            this.buttonLeft.Location = new System.Drawing.Point(83, 184);
+            this.buttonLeft.Name = "buttonLeft";
+            this.buttonLeft.Size = new System.Drawing.Size(48, 40);
+            this.buttonLeft.TabIndex = 12;
+            this.buttonLeft.Text = "<";
+            this.buttonLeft.UseVisualStyleBackColor = true;
+            this.buttonLeft.Click += new System.EventHandler(this.button_Left_Click);
+            // 
+            // buttonRight
+            // 
+            this.buttonRight.Location = new System.Drawing.Point(156, 183);
+            this.buttonRight.Name = "buttonRight";
+            this.buttonRight.Size = new System.Drawing.Size(48, 40);
+            this.buttonRight.TabIndex = 11;
+            this.buttonRight.Text = ">";
+            this.buttonRight.UseVisualStyleBackColor = true;
+            this.buttonRight.Click += new System.EventHandler(this.button_Right_Click);
+            // 
+            // labelUserBirthDate
+            // 
+            this.labelUserBirthDate.AutoSize = true;
+            this.labelUserBirthDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUserBirthDate.Location = new System.Drawing.Point(376, 147);
+            this.labelUserBirthDate.Name = "labelUserBirthDate";
+            this.labelUserBirthDate.Size = new System.Drawing.Size(18, 20);
+            this.labelUserBirthDate.TabIndex = 10;
+            this.labelUserBirthDate.Text = "_";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(231, 147);
+            this.label5.Location = new System.Drawing.Point(296, 147);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "BirthDay:";
             // 
-            // label_User_Country
+            // labelUserCountry
             // 
-            this.label_User_Country.AutoSize = true;
-            this.label_User_Country.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_User_Country.Location = new System.Drawing.Point(311, 110);
-            this.label_User_Country.Name = "label_User_Country";
-            this.label_User_Country.Size = new System.Drawing.Size(18, 20);
-            this.label_User_Country.TabIndex = 8;
-            this.label_User_Country.Text = "_";
+            this.labelUserCountry.AutoSize = true;
+            this.labelUserCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUserCountry.Location = new System.Drawing.Point(376, 110);
+            this.labelUserCountry.Name = "labelUserCountry";
+            this.labelUserCountry.Size = new System.Drawing.Size(18, 20);
+            this.labelUserCountry.TabIndex = 8;
+            this.labelUserCountry.Text = "_";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(231, 110);
+            this.label8.Location = new System.Drawing.Point(296, 110);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 20);
             this.label8.TabIndex = 7;
             this.label8.Text = "Country:";
             // 
-            // label_User_City
+            // labelUserCity
             // 
-            this.label_User_City.AutoSize = true;
-            this.label_User_City.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_User_City.Location = new System.Drawing.Point(311, 75);
-            this.label_User_City.Name = "label_User_City";
-            this.label_User_City.Size = new System.Drawing.Size(18, 20);
-            this.label_User_City.TabIndex = 6;
-            this.label_User_City.Text = "_";
+            this.labelUserCity.AutoSize = true;
+            this.labelUserCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUserCity.Location = new System.Drawing.Point(376, 75);
+            this.labelUserCity.Name = "labelUserCity";
+            this.labelUserCity.Size = new System.Drawing.Size(18, 20);
+            this.labelUserCity.TabIndex = 6;
+            this.labelUserCity.Text = "_";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(231, 75);
+            this.label6.Location = new System.Drawing.Point(296, 75);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 20);
             this.label6.TabIndex = 5;
             this.label6.Text = "City:";
             // 
-            // label_User_Surname
+            // labelUserSurname
             // 
-            this.label_User_Surname.AutoSize = true;
-            this.label_User_Surname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_User_Surname.Location = new System.Drawing.Point(311, 41);
-            this.label_User_Surname.Name = "label_User_Surname";
-            this.label_User_Surname.Size = new System.Drawing.Size(18, 20);
-            this.label_User_Surname.TabIndex = 4;
-            this.label_User_Surname.Text = "_";
+            this.labelUserSurname.AutoSize = true;
+            this.labelUserSurname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUserSurname.Location = new System.Drawing.Point(376, 41);
+            this.labelUserSurname.Name = "labelUserSurname";
+            this.labelUserSurname.Size = new System.Drawing.Size(18, 20);
+            this.labelUserSurname.TabIndex = 4;
+            this.labelUserSurname.Text = "_";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(231, 41);
+            this.label4.Location = new System.Drawing.Point(296, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Surname:";
             // 
-            // label_user_Name
+            // labelUserName
             // 
-            this.label_user_Name.AutoSize = true;
-            this.label_user_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_user_Name.Location = new System.Drawing.Point(311, 7);
-            this.label_user_Name.Name = "label_user_Name";
-            this.label_user_Name.Size = new System.Drawing.Size(18, 20);
-            this.label_user_Name.TabIndex = 2;
-            this.label_user_Name.Text = "_";
+            this.labelUserName.AutoSize = true;
+            this.labelUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelUserName.Location = new System.Drawing.Point(376, 7);
+            this.labelUserName.Name = "labelUserName";
+            this.labelUserName.Size = new System.Drawing.Size(18, 20);
+            this.labelUserName.TabIndex = 2;
+            this.labelUserName.Text = "_";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(16, 226);
+            this.label2.Location = new System.Drawing.Point(16, 267);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 20);
+            this.label2.Size = new System.Drawing.Size(103, 20);
             this.label2.TabIndex = 3;
-            this.label2.Text = "User ID:";
+            this.label2.Text = "First User ID:";
             // 
-            // textBox_User_ID
+            // textBoxUser1ID
             // 
-            this.textBox_User_ID.Location = new System.Drawing.Point(90, 226);
-            this.textBox_User_ID.Name = "textBox_User_ID";
-            this.textBox_User_ID.Size = new System.Drawing.Size(174, 20);
-            this.textBox_User_ID.TabIndex = 4;
+            this.textBoxUser1ID.Location = new System.Drawing.Point(149, 267);
+            this.textBoxUser1ID.Name = "textBoxUser1ID";
+            this.textBoxUser1ID.Size = new System.Drawing.Size(174, 20);
+            this.textBoxUser1ID.TabIndex = 4;
             // 
-            // button_Get_Information
+            // textBoxUser2ID
             // 
-            this.button_Get_Information.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_Get_Information.Location = new System.Drawing.Point(20, 260);
-            this.button_Get_Information.Name = "button_Get_Information";
-            this.button_Get_Information.Size = new System.Drawing.Size(244, 40);
-            this.button_Get_Information.TabIndex = 6;
-            this.button_Get_Information.Text = "Get Information";
-            this.button_Get_Information.UseVisualStyleBackColor = true;
-            this.button_Get_Information.Click += new System.EventHandler(this.button_Get_Information_Click);
+            this.textBoxUser2ID.Location = new System.Drawing.Point(148, 300);
+            this.textBoxUser2ID.Name = "textBoxUser2ID";
+            this.textBoxUser2ID.Size = new System.Drawing.Size(174, 20);
+            this.textBoxUser2ID.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(16, 300);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(127, 20);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Second User ID:";
+            // 
+            // buttonFindFriends
+            // 
+            this.buttonFindFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFindFriends.Location = new System.Drawing.Point(342, 271);
+            this.buttonFindFriends.Name = "buttonFindFriends";
+            this.buttonFindFriends.Size = new System.Drawing.Size(141, 40);
+            this.buttonFindFriends.TabIndex = 11;
+            this.buttonFindFriends.Text = "Find Friends";
+            this.buttonFindFriends.UseVisualStyleBackColor = true;
+            this.buttonFindFriends.Click += new System.EventHandler(this.button_Find_Friends_Click);
             // 
             // main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 312);
-            this.Controls.Add(this.button_Get_Information);
-            this.Controls.Add(this.textBox_User_ID);
+            this.ClientSize = new System.Drawing.Size(577, 345);
+            this.Controls.Add(this.buttonFindFriends);
+            this.Controls.Add(this.textBoxUser2ID);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxUser1ID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Name = "main_Form";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Vk API";
-            ((System.ComponentModel.ISupportInitialize)(this.user_Photo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUserPhoto)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -224,21 +269,25 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox user_Photo;
+        private System.Windows.Forms.PictureBox pictureBoxUserPhoto;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label_User_Country;
+        private System.Windows.Forms.Label labelUserCountry;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label_User_City;
+        private System.Windows.Forms.Label labelUserCity;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label_User_Surname;
+        private System.Windows.Forms.Label labelUserSurname;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label_user_Name;
+        private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_User_ID;
-        private System.Windows.Forms.Button button_Get_Information;
-        private System.Windows.Forms.Label label_User_BDay;
+        private System.Windows.Forms.TextBox textBoxUser1ID;
+        private System.Windows.Forms.Label labelUserBirthDate;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxUser2ID;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonFindFriends;
+        private System.Windows.Forms.Button buttonLeft;
+        private System.Windows.Forms.Button buttonRight;
     }
 }
 

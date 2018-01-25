@@ -21,68 +21,105 @@ namespace vk_api_wf
             InitializeComponent();
         }
 
-        private string user_id;
+        private int numberFriend = 0;//номер отображаемого друга
+        private List<string> friendsIdList = new List<string>();//список найденных общих друзей
+        private const string userGetURL = "https://api.vk.com/method/users.get?user_ids=";//ссылка для получения информации о пользователе
+        private const string fiedls = "&fields=country,city,bdate,crop_photo&v=5.69";//
+        private const string friendsGetURL="https://api.vk.com/method/friends.get?user_id=";//ссылка для нахождения общих друзей
 
-        private void button_Get_Information_Click(object sender, EventArgs e)
+
+        #region обработчики кнопок
+        private void button_Find_Friends_Click(object sender, EventArgs e)
         {
             try
             {
-                user_id = textBox_User_ID.Text;
-                Response resp = GetUser();
-                resp = GetCountry(resp);
-                resp = GetCity(resp);
-                resp = Get_BirthDay(resp);
-                resp = Get_Photo(resp);
+                ClearForm();
+                friendsIdList = GetMutualFriends(textBoxUser1ID.Text, textBoxUser2ID.Text);
+                DisplayFriendFromList(0);
             }
-            catch (NullReferenceException)
+            catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("Введите корректный id пользователя");
+                MessageBox.Show("Введите корректные Id пользователей");
             }
-            catch (WebException)
+        }
+
+        private void button_Right_Click(object sender, EventArgs e)
+        {
+            if (numberFriend + 1 < friendsIdList.Count) numberFriend++;
+            else numberFriend = 0;
+            DisplayFriendFromList(numberFriend);
+        }
+
+        private void button_Left_Click(object sender, EventArgs e)
+        {
+            if (numberFriend - 1 >= 0) numberFriend--;
+            else numberFriend = friendsIdList.Count - 1;
+            DisplayFriendFromList(numberFriend);
+        }
+        #endregion
+
+        private User GetUser(string user_id)//получение информации о пользователе по его id
+        {
+            User user = API.GetResponse<User>(userGetURL + user_id + fiedls);
+            return user;
+        }
+
+        private Friend GetIdFriends(string user_id)//получение списка всех друзей пользователя по его id
+        {
+            Friend friend = API.GetResponse<Friend>(friendsGetURL + user_id + "&v = 5.69");
+            return friend;
+        }
+
+        private List<string> GetMutualFriends(string idFriend1, string idFriend2)//нахождение списка id общих друзей
+        {
+            string user1_id = GetUser(idFriend1).FieldsUserArray[0].Id;
+            Friend firstFriend = GetIdFriends(user1_id);
+            List<string> firstList = firstFriend.ItemFriends;
+            string user2_id = GetUser(idFriend2).FieldsUserArray[0].Id;
+            Friend secondFriend = GetIdFriends(user2_id);
+            List<string> secondList = secondFriend.ItemFriends;
+            numberFriend = 0;
+            return firstFriend.GetMutualFriends(secondFriend);
+        }
+
+
+        private void DisplayFriendFromList(int num)//отображение информации о друге по его номеру в списке
+        {
+            if (friendsIdList.Count != 0)
             {
-                MessageBox.Show("Отсутствует подключение с Интернетом");
+                User user = GetUser(friendsIdList[num]);//получение информации о друге по его id
+                DisplayInfoUser(user);//отображение информации о друге
             }
         }
 
-        private Response GetUser()
+        #region отображение в форме
+        private void DisplayInfoUser(User user)//отображение информации о пользователе
         {
-            Response resp = API.Get_Info_User<Response>("https://api.vk.com/method/users.get?user_ids=" + user_id + "&v=5.69");
-            label_user_Name.Text = (resp.response[0].first_name != null) ? resp.response[0].first_name : "unknown";
-            label_User_Surname.Text = (resp.response[0].last_name != null) ? resp.response[0].last_name : "unknown";
-            return resp;
+            labelUserName.Text = (user.FieldsUserArray[0].FirstName != null) ? user.FieldsUserArray[0].FirstName : "unknown";
+            labelUserSurname.Text = (user.FieldsUserArray[0].LastName != null) ? user.FieldsUserArray[0].LastName : "unknown";
+            labelUserCountry.Text = (user.FieldsUserArray[0].Country != null) ? user.FieldsUserArray[0].Country.Title : "unknown";
+            labelUserCity.Text = (user.FieldsUserArray[0].City != null) ? user.FieldsUserArray[0].City.Title : "unknown";
+            if (user.FieldsUserArray[0].DateBirth != null)
+            {
+                if (user.FieldsUserArray[0].DateBirth.Length <= 5) user.FieldsUserArray[0].DateBirth += ".XXXX";
+                labelUserBirthDate.Text = user.FieldsUserArray[0].DateBirth;
+            }
+            else 
+            labelUserBirthDate.Text =  "unknown";
+            string path = user.FieldsUserArray[0].CropPhoto.Photo.PhotoUrl;
+            pictureBoxUserPhoto.ImageLocation = path;
+            pictureBoxUserPhoto.Load();
         }
 
-        private Response GetCountry(Response resp)
+        private void ClearForm()
         {
-            resp = API.Get_Info_User<Response>("https://api.vk.com/method/users.get?user_ids=" + user_id + "&fields=country&v=5.69");
-            label_User_Country.Text = (resp.response[0].country != null) ? resp.response[0].country.title : "unknown";
-            return resp;
+            pictureBoxUserPhoto.Image = null;
+            labelUserName.Text = "_";
+            labelUserSurname.Text = "_";
+            labelUserCountry.Text = "_";
+            labelUserCity.Text = "_";
+            labelUserBirthDate.Text = "_";
         }
-
-        private Response GetCity(Response resp)
-        {
-            resp = API.Get_Info_User<Response>("https://api.vk.com/method/users.get?user_ids=" + user_id + "&fields=city&v=5.69");
-            label_User_City.Text = (resp.response[0].city != null) ? resp.response[0].city.title : "unknown";
-            return resp;
-        }
-
-        private Response Get_BirthDay(Response resp)
-        {
-            resp = API.Get_Info_User<Response>("https://api.vk.com/method/users.get?user_ids=" + user_id + "&fields=bdate&v=5.69");
-            label_User_BDay.Text = (resp.response[0].bdate != null) ? resp.response[0].bdate : "unknown";
-            return resp;
-        }
-
-        private Response Get_Photo(Response resp)
-        {
-            resp = API.Get_Info_User<Response>("https://api.vk.com/method/users.get?user_ids=" + user_id + "&fields=crop_photo&v=5.69");
-            string path = resp.response[0].crop_photo.photo.photo_url;
-            user_Photo.ImageLocation = path;
-            user_Photo.Load();
-            return resp;
-        }
-
-      
-        
+        #endregion
     }
 }

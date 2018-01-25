@@ -10,8 +10,8 @@ namespace vk_api_wf
     public class Country
     {
         [JsonProperty(PropertyName = "id")]
-        public string id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "title")]
-        public string title { get; set; }
+        public string Title { get; set; }
     }
 }
